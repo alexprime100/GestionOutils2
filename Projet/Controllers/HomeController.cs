@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Projet.Models;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,17 @@ namespace Projet.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IOptions<DataContext> _dataSettings;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IOptions<DataContext> options)
         {
             _logger = logger;
+            _dataSettings = options;
         }
 
         public IActionResult Index()
         {
+            ViewData["ConnectionString"] = _dataSettings.Value.ConnectionString;
             return View();
         }
 
@@ -40,7 +44,7 @@ namespace Projet.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult SignUp(string firstName, string name, string adress, string email, DateTime dob, string password, string password2)
+        public IActionResult SignUp(string firstName, string name, string adress, string email, string phone, DateTime dob, string password, string password2)
         {
             if (!password.Equals(password2))
             {
@@ -54,6 +58,7 @@ namespace Projet.Controllers
                 UserName = name,
                 UserAdress = adress,
                 UserEmail = email,
+                UserPhoneNumber = phone,
                 UserDateOfBirth = dob,
                 UserPassword = hashedPassword,
                 UserRole = "User"

@@ -10,7 +10,18 @@ namespace Projet
 {
     public class DataContext : DbContext
     {
+        public string ConnectionString { get; set; }
         public DbSet<User> Users { get; set; }
+
+        public DataContext() : base()
+        {
+
+        }
+
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+            
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

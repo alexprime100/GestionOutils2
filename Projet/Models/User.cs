@@ -19,6 +19,7 @@ namespace Projet.Models
         public DateTime UserDateOfBirth { get; set; }
         public string UserAdress { get; set; }
         public string UserEmail { get; set; }
+        public string UserPhoneNumber { get; set; }
         public string UserPassword { get; set; }
         public string UserRole { get; set; }
 
@@ -35,6 +36,7 @@ namespace Projet.Models
             if (UserDateOfBirth != that.UserDateOfBirth) return false;
             if (UserAdress != that.UserAdress) return false;
             if (UserEmail != that.UserEmail) return false;
+            if (UserPhoneNumber != that.UserPhoneNumber) return false;
             if (UserPassword != that.UserPassword) return false;
             if (UserRole != that.UserRole) return false;
 
@@ -49,6 +51,7 @@ namespace Projet.Models
             result += 31 * result + (UserDateOfBirth != null ? UserDateOfBirth.GetHashCode() : 0);
             result += 31 * result + (UserAdress != null ? UserAdress.GetHashCode() : 0);
             result += 31 * result + (UserEmail != null ? UserEmail.GetHashCode() : 0);
+            result += 31 * result + (UserPhoneNumber != null ? UserPhoneNumber.GetHashCode() : 0);
             result += 31 * result + (UserPassword != null ? UserPassword.GetHashCode() : 0);
             result += 31 * result + (UserRole != null ? UserRole.GetHashCode() : 0);
 

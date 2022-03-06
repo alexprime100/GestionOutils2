@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +26,10 @@ namespace Projet
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            /*services.Configure<DataContext>(Configuration.GetSection("DataContext"));
+            services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("myconn")));*/
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => {
                     options.LoginPath = "/login";
