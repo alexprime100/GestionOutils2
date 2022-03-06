@@ -11,7 +11,18 @@ namespace Projet
     public class DataContext : DbContext
     {
         public string ConnectionString { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Utilisateur> Utilisateurs { get; set; }
+        public DbSet<Achat> Achats { get; set; }
+        public DbSet<Commande> Commandes { get; set; }
+        public DbSet<Electrique> Electriques { get; set; }
+        public DbSet<Entreprise> Entreprises { get; set; }
+        public DbSet<Hydraulique> Hydrauliques { get; set; }
+        public DbSet<Inventaire> Inventaires { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Manuel> Manuels { get; set; }
+        public DbSet<Outil> Outils { get; set; }
+        public DbSet<Panier> Paniers { get; set; }
+        public DbSet<Particulier> Particuliers { get; set; }
 
         public DataContext() : base()
         {
@@ -33,26 +44,28 @@ namespace Projet
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(new User
+            modelBuilder.Entity<Utilisateur>().HasData(new Utilisateur
             {
-                UserId = 1,
-                UserName = "user",
-                UserFirstName = "user",
-                UserEmail = "user@mail.com",
-                UserAdress = "adress1",
-                UserDateOfBirth = DateTime.Now,
-                UserPassword = Program.Hash("azert", "user@mail.com"),
-                UserRole = "User"
-            }, new User()
+                Id = 1,
+                Nom = "user",
+                Prenom = "user",
+                Courriel = "user@mail.com",
+                Adresse = "adress1",
+                Telephone = "111",
+                DateNaissance = DateTime.Now,
+                MotDePasse = Program.Hash("azert", "user@mail.com"),
+                Role = "User"
+            }, new Utilisateur()
             {
-                UserId = 2,
-                UserName = "admin",
-                UserFirstName = "admin",
-                UserEmail = "admin@mail.com",
-                UserAdress = "adress2",
-                UserDateOfBirth = DateTime.Now,
-                UserPassword = Program.Hash("azert", "admin@mail.com"),
-                UserRole = "Admin"
+                Id = 2,
+                Nom = "admin",
+                Prenom = "admin",
+                Courriel = "admin@mail.com",
+                Adresse = "adress2",
+                Telephone = "222",
+                DateNaissance = DateTime.Now,
+                MotDePasse = Program.Hash("azert", "admin@mail.com"),
+                Role = "Admin"
             });
         }
     }

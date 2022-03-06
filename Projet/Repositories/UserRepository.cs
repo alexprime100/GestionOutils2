@@ -10,17 +10,17 @@ namespace Projet.Repositories
 {
     public static class UserRepository
     {
-        public static List<User> GetAll(this DbSet<User> users)
+        public static List<Utilisateur> GetAll(this DbSet<Utilisateur> users)
         {
             return users.ToList();
         }
 
-        public static User GetById(this DbSet<User> users, long id)
+        public static Utilisateur GetById(this DbSet<Utilisateur> users, long id)
         {
-            return users.FirstOrDefault(u => u.UserId == id);
+            return users.FirstOrDefault(u => u.Id == id);
         }
 
-        public static void RemoveById(this DbSet<User> users, long id)
+        public static void RemoveById(this DbSet<Utilisateur> users, long id)
         {
             users.Remove(users.GetById(id));
         }

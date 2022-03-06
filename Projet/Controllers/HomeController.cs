@@ -52,23 +52,23 @@ namespace Projet.Controllers
                 return View("register");
             }
             string hashedPassword = Program.Hash(password, email);
-            User newUser = new User
+            Utilisateur newUser = new Utilisateur
             {
-                UserFirstName = firstName,
-                UserName = name,
-                UserAdress = adress,
-                UserEmail = email,
-                UserPhoneNumber = phone,
-                UserDateOfBirth = dob,
-                UserPassword = hashedPassword,
-                UserRole = "User"
+                Prenom = firstName,
+                Nom = name,
+                Adresse = adress,
+                Courriel = email,
+                Telephone = phone,
+                DateNaissance = dob,
+                MotDePasse = hashedPassword,
+                Role = "User"
             };
             try
             {
                 var db = new DataContext();
-                if (db.Users.Count(u => u.UserEmail == email) == 0)
+                if (db.Utilisateurs.Count(u => u.Courriel == email) == 0)
                 {
-                    db.Users.Add(newUser);
+                    db.Utilisateurs.Add(newUser);
                     db.SaveChanges();
                 }
                 else
@@ -100,14 +100,14 @@ namespace Projet.Controllers
 
             try
             {
-                User user = db.Users.FirstOrDefault(u => u.UserEmail == email && u.UserPassword== hashedPassword);
+                Utilisateur user = db.Utilisateurs.FirstOrDefault(u => u.Courriel == email && u.MotDePasse == hashedPassword);
 
                 if (user != null)
                 {
                     var claims = new List<Claim>();
                     claims.Add(new Claim(ClaimTypes.NameIdentifier, email));
-                    claims.Add(new Claim(ClaimTypes.Name, user.UserFirstName + " " + user.UserName));
-                    claims.Add(new Claim(ClaimTypes.Role, user.UserRole));
+                    claims.Add(new Claim(ClaimTypes.Name, user.Prenom + " " + user.Nom));
+                    claims.Add(new Claim(ClaimTypes.Role, user.Role));
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                     await HttpContext.SignInAsync(claimsPrincipal);
