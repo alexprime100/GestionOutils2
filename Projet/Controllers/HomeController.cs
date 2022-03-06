@@ -17,17 +17,14 @@ namespace Projet.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IOptions<DataContext> _dataSettings;
 
-        public HomeController(ILogger<HomeController> logger, IOptions<DataContext> options)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _dataSettings = options;
         }
 
         public IActionResult Index()
         {
-            ViewData["ConnectionString"] = _dataSettings.Value.ConnectionString;
             return View();
         }
 
@@ -46,12 +43,16 @@ namespace Projet.Controllers
         [HttpPost("register")]
         public IActionResult SignUp(string firstName, string name, string adress, string email, string phone, DateTime dob, string password, string password2)
         {
-            if (!password.Equals(password2))
+            try
             {
-                TempData["Error"] = "Error, the passwords are not identical";
+                UserSecurity.Verification(email, password, password2);
+            }
+            catch (Exception e)
+            {
+                TempData["Error"] = e.Message;
                 return View("register");
             }
-            string hashedPassword = Program.Hash(password, email);
+            string hashedPassword = UserSecurity.Hash(password, email);
             Utilisateur newUser = new Utilisateur
             {
                 Prenom = firstName,
@@ -65,7 +66,7 @@ namespace Projet.Controllers
             };
             try
             {
-                var db = new DataContext();
+                var db = DataContext.GetInstance();
                 if (db.Utilisateurs.Count(u => u.Courriel == email) == 0)
                 {
                     db.Utilisateurs.Add(newUser);
@@ -95,8 +96,8 @@ namespace Projet.Controllers
         public async Task<IActionResult> Validate(string email, string password, string returnUrl)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            string hashedPassword = Program.Hash(password, email);
-            var db = new DataContext();
+            string hashedPassword = UserSecurity.Hash(password, email);
+            var db = DataContext.GetInstance();
 
             try
             {

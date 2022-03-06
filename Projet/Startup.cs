@@ -29,7 +29,9 @@ namespace Projet
             /*services.Configure<DataContext>(Configuration.GetSection("DataContext"));
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("myconn")));*/
+                    Configuration.GetConnectionString("ConnectionString")));*/
+            DataContext db = DataContext.GetInstance(Configuration.GetConnectionString("ConnectionString"));
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => {
                     options.LoginPath = "/login";
