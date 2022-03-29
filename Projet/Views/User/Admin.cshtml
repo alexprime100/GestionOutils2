@@ -1,14 +1,15 @@
-﻿@*
+﻿@model IEnumerable<Projet.Models.Utilisateur>
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@using Projet.Models
 @{
+    ViewData["Title"] = "Admin";
     var db = DataContext.GetInstance();
     List<Utilisateur> list = db.Utilisateurs.ToList();
 }
-
 <div class="container">
     <h1>Liste des utilisateurs</h1>
+    <p> <a asp-action="Create" class="btn btn-sm btn-info">Ajouter</a> </p>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -23,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var user in list)
+            @foreach (var user in Model)
             {
                 <tr>
                     <th>@user.Id</th>
@@ -34,8 +35,14 @@
                     <th>@user.Telephone</th>
                     <th>@user.Courriel</th>
                     <th>@user.Role</th>
+                    <th>
+                        <div class="btn-group">
+                            <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-sm btn-info">Modifier</a>
+                            <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-sm btn-danger ml-1">Modifier</a>
+                        </div>
+                    </th>
                 </tr>
             }
-            </tbody>
+        </tbody>
     </table>
 </div>

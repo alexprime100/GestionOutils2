@@ -1,0 +1,26 @@
+﻿@model Projet.Models.Utilisateur
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Modifier un utilisateur</h1>
+<hr/>
+<form action="" method="post">
+    <ul> <input type="number" name="id" hidden="hidden" value="@Model.Id" /> </ul>
+    <ul> <label> Nom de famille</label></ul>
+    <ul> <input type="text" name="name" value="@Model.Nom" />  </ul>
+    <ul> <label> </label>Prénom</ul>
+    <ul> <input type="text" name="firstname" value="@Model.Prenom" />  </ul>
+    <ul> <label> </label>Adresse</ul>
+    <ul> <input type="text" name="adress" value="@Model.Adresse" />  </ul>
+    <ul> <label> </label>Date de naissance</ul>
+    <ul> <input type="date" name="dob" value="@Model.DateNaissance" />  </ul>
+    <ul> <label> </label>Numéro de téléphone</ul>
+    <ul> <input type="tel" name="phone" value="@Model.Telephone" />  </ul>
+    <ul> <label> </label>Courriel</ul>
+    <ul> <input type="email" name="email" value="@Model.Courriel" />  </ul>
+    <ul> <label> </label>Admin ?</ul>
+    <ul> <input type="checkbox" name="role" value="@Model.Role.Equals("Admin")" />  </ul>
+    <hr/>
+    <ul> <input type="submit" value="edit" />  </ul>
+</form>
