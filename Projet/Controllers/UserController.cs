@@ -58,5 +58,13 @@ namespace Projet.Controllers
 
             return RedirectToAction("Admin");
         }
+
+        //[HttpPost("delete")]
+        public IActionResult Delete(long id)
+        {
+            db.Utilisateurs.RemoveById(id);
+            db.SaveChanges();
+            return RedirectToAction("Admin");
+        }
     }
 }

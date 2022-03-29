@@ -10,10 +10,6 @@ namespace Projet.Repositories
 {
     public static class UserRepository
     {
-        public static List<Utilisateur> GetAll(this DbSet<Utilisateur> users)
-        {
-            return users.ToList();
-        }
 
         public static Utilisateur GetById(this DbSet<Utilisateur> users, long id)
         {
