@@ -36,5 +36,10 @@ namespace Projet.Extensions
                     return 0;
             }
         }
+
+        public static bool IsSame(this DateTime date, DateTime date2)
+        {
+            return date.Day.Equals(date2.Day) && date.Month.Equals(date2.Month) && date.Year.Equals(date2.Year);
+        }
     }
 }

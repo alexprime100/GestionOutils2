@@ -17,10 +17,12 @@ namespace Projet.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DataContext db;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            db = DataContext.GetInstance();
         }
 
         public IActionResult Index()
@@ -38,6 +40,14 @@ namespace Projet.Controllers
         {
             ViewData["ReturnUrl"] = "Home/Login";
             return View();
+        }
+
+        [HttpPost("save")]
+        public IActionResult Save(long id, string name, string firstname, string adress, DateTime dob, string phone, string email, bool role)
+        {
+            
+
+            return RedirectToAction("Admin");
         }
 
         [HttpPost("register")]
@@ -66,7 +76,6 @@ namespace Projet.Controllers
             };
             try
             {
-                var db = DataContext.GetInstance();
                 if (db.Utilisateurs.Count(u => u.Courriel == email) == 0)
                 {
                     db.Utilisateurs.Add(newUser);
@@ -97,7 +106,6 @@ namespace Projet.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
             string hashedPassword = UserSecurity.Hash(password, email);
-            var db = DataContext.GetInstance();
 
             try
             {
