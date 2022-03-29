@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using microServiceRecherche.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+
 
 namespace microServiceRecherche.Controllers
 {
@@ -25,10 +27,11 @@ namespace microServiceRecherche.Controllers
         }
 
         // GET: api/recherche/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{name}", Name = "Get")]
+        public IQueryable<Electrique> Get(string name)
         {
-            return "value";
+            Debug.WriteLine("Send to debug output.");
+            return db.Electriques.Where( elec => elec.NomOutil.Contains(name));
         }
 
         // POST: api/recherche
