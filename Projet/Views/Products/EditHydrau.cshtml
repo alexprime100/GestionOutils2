@@ -1,0 +1,24 @@
+﻿@model Projet.Models.Hydraulique
+@{
+    ViewData["Title"] = "EditHydrau";
+}
+
+<h1>Modifier un produit</h1>
+<hr />
+<form action="" method="post">
+    <ul> <input type="number" name="id" hidden="hidden" value="@Model.IdHydraulique" /> </ul>
+    <ul> <label> </label>Nom</ul>
+    <ul> <input type="text" name="nom" value="@Model.NomOutil" />  </ul>
+    <ul> <label> </label>Pression</ul>
+    <ul> <input type="text" name="pression" value="@Model.Pression" />  </ul>
+    <ul> <label> </label>Prix</ul>
+    <ul> <input type="text" name="prix" value="@Model.Prix" />  </ul>
+    <ul> <label> </label>Stock</ul>
+    <ul> <input type="text" name="stock" value="@Model.Stock" />  </ul>
+    <ul> <label> </label>Description</ul>
+    <ul> <input type="text" name="description" value="@Model.Description" />  </ul>
+    <ul> <label> </label>Changer d'image</ul>
+    <ul> <input type="file" name="file" accept="image/png, image/jpeg"> </ul>
+    <br />
+    <ul> <input type="submit" value="Save" />  </ul>
+</form>

@@ -15,7 +15,7 @@ namespace Projet.Repositories
 
         public static Hydraulique GetHydrauById(this DbSet<Hydraulique> hydrau, long id)
         {
-            return hydrau.FirstOrDefault(u => u.IdOutil == id);
+            return hydrau.FirstOrDefault(u => u.IdHydraulique == id);
         }
 
         public static void RemoveElecById(this DbSet<Electrique> elec, long id)

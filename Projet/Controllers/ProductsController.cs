@@ -63,7 +63,7 @@ namespace Projet.Controllers
         {
             db.Hydrauliques.RemoveHydrauById(id);
             db.SaveChanges();
-            return RedirectToAction("Admin");
+            return RedirectToAction("ListProducts");
         }
 
         //[HttpPost("deleteElec")]
@@ -116,6 +116,80 @@ namespace Projet.Controllers
             }
             return RedirectToAction("ListProducts");
 
+        }
+
+
+        [HttpGet("AddHydrau")]
+        public IActionResult AddHydrau()
+        {
+            ViewData["ReturnUrl"] = "AddHydrau";
+            return View();
+        }
+
+        [HttpPost("AddHydrau")]
+        public IActionResult AddHydrau(long id, long idOutils, string nom, long pression, double prix, int stock, string description, Byte[] image)
+        {
+
+            Hydraulique newHydrau = new Hydraulique
+            {
+                IdHydraulique = id,
+                IdOutil = idOutils,
+                NomOutil = nom,
+                Prix = prix,
+                Description = description,
+                Stock = stock,
+                Pression = pression,
+                Image = image,
+            };
+            try
+            {
+
+                db.Hydrauliques.Add(newHydrau);
+                db.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return RedirectToAction("ListProducts");
+
+        }
+
+        [HttpGet("editHydrau")]
+        public IActionResult EditHydrau(long id)
+        {
+            Hydraulique hydrau = db.Hydrauliques.GetHydrauById(id);
+            return View(hydrau);
+        }
+
+
+        [HttpPost("editHydrau")]
+        public IActionResult Save(long id, string nom, long pression,string description, double prix, int stock, Byte[] image)
+        {
+
+
+            try
+            {
+                Hydraulique hydrau = db.Hydrauliques.GetHydrauById(id);
+                Console.WriteLine(hydrau.ToString());
+                if (!hydrau.NomOutil.Equals(nom)) hydrau.NomOutil = nom;
+                if (!hydrau.Pression.Equals(pression)) hydrau.Pression = pression;
+                if (!hydrau.Prix.Equals(prix)) hydrau.Prix = prix;
+                if (!hydrau.Description.Equals(description)) hydrau.Description = description;
+                if (!hydrau.Stock.Equals(stock)) hydrau.Stock = stock;
+                //if (!elec.Image.Equals(image)) elec.Image = image.getByte();
+
+                db.Hydrauliques.Update(hydrau);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
+            return RedirectToAction("ListProducts");
         }
     }
 }

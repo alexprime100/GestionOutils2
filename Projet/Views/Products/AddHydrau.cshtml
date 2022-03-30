@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "AddHydrau";
+}
+
+<h1>Ajouter un produit hydraulique</h1>
+<hr />
+<form action="" method="post">
+    <ul> <label> </label>Nom</ul>
+    <ul> <input type="text" name="nom" />  </ul>
+    <ul> <label> </label>Pression</ul>
+    <ul> <input type="text" name="pression" />  </ul>
+    <ul> <label> </label>Prix</ul>
+    <ul> <input type="text" name="prix" />  </ul>
+    <ul> <label> </label>Stock</ul>
+    <ul> <input type="text" name="stock" />  </ul>
+    <ul> <label> </label>Description</ul>
+    <ul> <input type="text" name="description" />  </ul>
+    <ul> <label> </label>Changer d'image</ul>
+    <ul> <input type="file" name="file" accept="image/png, image/jpeg"> </ul>
+    <br />
+    <ul> <input asp-controller="Products" type="submit" value="Save" />  </ul>
+</form>
