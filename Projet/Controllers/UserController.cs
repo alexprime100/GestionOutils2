@@ -67,35 +67,5 @@ namespace Projet.Controllers
             db.SaveChanges();
             return RedirectToAction("Admin");
         }
-
-        [HttpGet("editelec")]
-        public IActionResult EditElec(long id)
-        {
-            Electrique electrique = db.Electriques.GetById(id);
-            return View(electrique);
-        }
-
-        [HttpPost("editElec")]
-        public IActionResult SaveElec(long id, string name, long puissance, string description, double prix, int stock)
-        {
-            try
-            {
-                
-                Electrique electrique = db.Electriques.GetById(id);
-                if (!electrique.NomOutil.Equals(name)) electrique.NomOutil = name;
-                if (!electrique.Puissance.Equals(puissance)) electrique.Puissance = puissance;
-                if (!electrique.Description.Equals(description)) electrique.Description = description;
-                if (!electrique.Prix.Equals(prix)) electrique.Prix = prix;
-                if (!electrique.Stock.Equals(stock)) electrique.Stock = stock;
-
-                db.Electriques.Update(electrique);
-                db.SaveChanges();
-            }
-            catch(Exception e)
-            {
-
-            }
-            return RedirectToAction("Admin");
-        }
     }
 }

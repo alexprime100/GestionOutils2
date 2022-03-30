@@ -6,10 +6,8 @@
     ViewData["Title"] = "Admin";
     var db = DataContext.GetInstance();
     List<Utilisateur> users = db.Utilisateurs.ToList();
-    List<Electrique> elec = db.Electriques.ToList();
-    List<Hydraulique> hydrau = db.Hydrauliques.ToList();
-    List<Manuel> manuels = db.Manuels.ToList();
 }
+
 <div class="container">
     <h1>Liste des utilisateurs</h1>
     <p> <a asp-action="Create" class="btn btn-sm btn-info">Ajouter</a> </p>
@@ -45,47 +43,6 @@
                         </div>
                     </th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
-
-<hr/>
-<hr/>
-
-<div class="container">
-    <h1>Liste des outils électriques</h1>
-    <p> <a asp-action="Create" class="btn btn-sm btn-info">Ajouter</a> </p>
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Puissance</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Stock</th>
-                <th>Image</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var outil in elec)
-            {
-            <tr>
-                <th>@outil.IdElectrique</th>
-                <th>@outil.NomOutil</th>
-                <th>@outil.Puissance</th>
-                <th>@outil.Description</th>
-                <th>@outil.Prix</th>
-                <th>@outil.Stock</th>
-                <th><img src="@outil.Image" /></th>
-                <th>
-                    <div class="btn-group">
-                        <a asp-action="EditElec" asp-route-id="@outil.IdElectrique" class="btn btn-sm btn-info">Modifier</a>
-                        <a asp-action="DeleteElec" asp-route-id="@outil.IdElectrique" class="btn btn-sm btn-danger ml-1">Supprimer</a>
-                    </div>
-                </th>
-            </tr>
             }
         </tbody>
     </table>

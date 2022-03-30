@@ -20,5 +20,7 @@ namespace Projet.Models
         public double Prix { get; set; }
         public int Stock { get; set; }
         public byte[] Image { get; set; }
+        
+   
     }
 }

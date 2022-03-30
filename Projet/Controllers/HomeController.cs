@@ -27,6 +27,7 @@ namespace Projet.Controllers
 
         public IActionResult Index()
         {
+      
             return View();
         }
 
@@ -100,6 +101,7 @@ namespace Projet.Controllers
             return View();
         }
 
+
         [HttpPost("login")]
         public async Task<IActionResult> Validate(string email, string password, string returnUrl)
         {
@@ -141,6 +143,7 @@ namespace Projet.Controllers
         [Authorize]
         public IActionResult Profile()
         {
+           
             return View();
         }
 
@@ -155,5 +158,7 @@ namespace Projet.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+     
     }
 }
