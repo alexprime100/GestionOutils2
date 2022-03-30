@@ -26,7 +26,9 @@ namespace Projet
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            /*services.Configure<DataContext>(Configuration.GetSection("DataContext"));
+            /*services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+            services.Configure<DataContext>(Configuration.GetSection("DataContext"));
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("ConnectionString")));*/
