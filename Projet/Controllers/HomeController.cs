@@ -42,6 +42,13 @@ namespace Projet.Controllers
             return View();
         }
 
+        [HttpGet("recherche")]
+        public String Recherche()
+        {
+            var responseString = ApiCall.GetApi("https://localhost:31661/api/recherche/advanced");
+            return responseString;
+        }
+
         [HttpPost("save")]
         public IActionResult Save(long id, string name, string firstname, string adress, DateTime dob, string phone, string email, bool role)
         {
