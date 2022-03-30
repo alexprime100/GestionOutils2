@@ -30,10 +30,9 @@ namespace Projet.Controllers
 
         
         [HttpPost("editElec")]
-        public IActionResult Save(long id, string nom, long puissance, double prix ,int stock, Byte[] image)
+        public IActionResult Save(long id, string nom, long puissance, double prix, string description ,int stock, Byte[] image)
         {
 
-            Console.WriteLine(id + " " + nom + " " + puissance + " " + prix + " " + stock);
 
             try
             {
@@ -42,6 +41,8 @@ namespace Projet.Controllers
                 if (!elec.NomOutil.Equals(nom)) elec.NomOutil = nom;
                 if (!elec.Puissance.Equals(puissance)) elec.Puissance = puissance;
                 if (!elec.Prix.Equals(prix)) elec.Prix = prix;
+                if (!elec.Description.Equals(description)) elec.Description = description;
+
                 if (!elec.Stock.Equals(stock)) elec.Stock = stock;
                 //if (!elec.Image.Equals(image)) elec.Image = image.getByte();
               
