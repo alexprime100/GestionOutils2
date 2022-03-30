@@ -49,14 +49,6 @@ namespace Projet.Controllers
             return responseString;
         }
 
-        [HttpPost("save")]
-        public IActionResult Save(long id, string name, string firstname, string adress, DateTime dob, string phone, string email, bool role)
-        {
-            
-
-            return RedirectToAction("Admin");
-        }
-
         [HttpPost("register")]
         public IActionResult SignUp(string firstName, string name, string adress, string email, string phone, DateTime dob, string password, string password2)
         {

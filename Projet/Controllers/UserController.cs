@@ -6,6 +6,7 @@ using Projet.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,15 +27,15 @@ namespace Projet.Controllers
             return View(list);
         }
 
-        [HttpGet("edit")]
-        public IActionResult Edit(long id)
+        [HttpGet("edituser")]
+        public IActionResult EditUser(long id)
         {
             Utilisateur user = db.Utilisateurs.GetById(id);
             return View(user);
         }
 
-        [HttpPost("edit")]
-        public IActionResult Save(long id, string name, string firstname, string adress, DateTime dob, string phone, string email, bool role)
+        [HttpPost("edituser")]
+        public IActionResult SaveUser(long id, string name, string firstname, string adress, DateTime dob, string phone, string email, bool role)
         {
             try
             {
@@ -60,10 +61,40 @@ namespace Projet.Controllers
         }
 
         //[HttpPost("delete")]
-        public IActionResult Delete(long id)
+        public IActionResult DeleteUser(long id)
         {
             db.Utilisateurs.RemoveById(id);
             db.SaveChanges();
+            return RedirectToAction("Admin");
+        }
+
+        [HttpGet("editelec")]
+        public IActionResult EditElec(long id)
+        {
+            Electrique electrique = db.Electriques.GetById(id);
+            return View(electrique);
+        }
+
+        [HttpPost("editElec")]
+        public IActionResult SaveElec(long id, string name, long puissance, string description, double prix, int stock)
+        {
+            try
+            {
+                
+                Electrique electrique = db.Electriques.GetById(id);
+                if (!electrique.NomOutil.Equals(name)) electrique.NomOutil = name;
+                if (!electrique.Puissance.Equals(puissance)) electrique.Puissance = puissance;
+                if (!electrique.Description.Equals(description)) electrique.Description = description;
+                if (!electrique.Prix.Equals(prix)) electrique.Prix = prix;
+                if (!electrique.Stock.Equals(stock)) electrique.Stock = stock;
+
+                db.Electriques.Update(electrique);
+                db.SaveChanges();
+            }
+            catch(Exception e)
+            {
+
+            }
             return RedirectToAction("Admin");
         }
     }
