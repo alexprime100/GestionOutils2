@@ -4,58 +4,45 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Projet</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <!-- Bootstrap style -->
+    <link id="callCss" rel="stylesheet" href="~/noname/bootstrap.min.css" media="screen" />
+    <link href="~/css/main.css" rel="stylesheet" media="screen" />
+    <!-- Bootstrap style responsive -->
+    <link href="~/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+    <!-- fav and touch icons -->
+    <style type="text/css" id="enject"></style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Projet</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
-                        </li>
-                        @if (!User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
-                            </li>
-                        }
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Profile">Profile</a>
-                            </li>
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Admin">Admin</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ListProducts">Products</a>
-                                </li>
-                            }
-                        }
+    <div id="header">
+        <div class="container">
+            <!-- Navbar ================================================== -->
+            <div id="logoArea" class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand" href=""><img src="" alt="no name" /></a>
+                    <form class="form-inline navbar-search" method="get" action="">
+                        <input name="keyword" value="" />
+                        <select value="" class="srchTxt">
+                            <option value="all">TOUS</option>
+                            <option value="electric">ÉLECTRIQUE</option>
+                            <option value="hydraulic">HYDRAULIQUE</option>
+                            <option value="manual">MANUEL</option>
+                        </select>
+                        <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+                    </form>
+                    <ul id="topMenu" class="nav pull-right">
+                        <li class=""><a href="">Nos magasins</a></li>
+                        <li class=""><a href="">Mon profil</a></li>
+                        <li class=""><a href="">Mon inventaire</a></li>
+                        <li class=""><a href="">Mon panier</a></li>
+                    </ul>
+                    <ul class="nav pull-right" style="left: 475px" sec:authorize="hasAnyAuthority('ADMIN')">
+                        <li class=""><a href="">Gestion utilisateurs</a></li>
+                        <li class=""><a href="">Gestion produits</a></li>
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -64,12 +51,11 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - Projet - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - noname - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

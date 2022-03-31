@@ -53,7 +53,7 @@ namespace Projet.Controllers
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e);
                 throw;
             }
 
