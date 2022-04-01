@@ -5,21 +5,89 @@
 @{
     var error = TempData["Error"] as string;
 }
-<h1>Register</h1>
 @if (!error.IsNullOrEmpty())
 {
     <h2 class="alert-danger" style="padding:20px">@error</h2>
 }
+
+@{
+    ViewData["Title"] = "Inscription";
+}
+
 <form action="" method="post">
-    <ul>
-        <li> <input type="text" name="firstName" placeholder="First Name" /> </li>
-        <li> <input type="text" name="name" placeholder="Last Name" /> </li>
-        <li> <input type="email" name="email" placeholder="Email adress" /> </li>
-        <li> <input type="password" name="password" placeholder="Password" /> </li>
-        <li> <input type="password" name="password2" placeholder="Confirm Password" /> </li>
-        <li> <input type="text" name="adress" placeholder="Adress" /> </li>
-        <li> <input type="tel" name="phone" placeholder="Telephone number" /> </li>
-        <li> <input type="date" name="dob" placeholder="Date of birth" /> </li>
-        <li> <input type="submit" value="register" /> </li>
-    </ul>
+    <span class="login100-form-title p-b-26">
+        Créer un compte
+    </span>
+
+    <div>
+        <center>
+            <span>Professionnel</span>
+            <input type="checkbox"><br><br>
+        </center>
+
+    </div>
+
+    <div class="wrap-input100">
+        <input class="input100" type="text" name="first-name" field="prenomcli" required>
+        <span class="focus-input100" data-placeholder="Prénom"></span>
+    </div>
+
+    <div class="wrap-input100">
+        <input class="input100" type="text" name="name" field="nomcli" required>
+        <span class="focus-input100" data-placeholder="Nom"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input" data-validate="Courriel valide: a@b.c">
+        <input class="input100" type="text" name="email" field="courrielcli" required>
+        <span class="focus-input100" data-placeholder="Courriel"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input" data-validate="Le mot de passe doit contenir au moins 8 caractères dont 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial">
+        <span class="btn-show-pass">
+            <i class="zmdi zmdi-eye"></i>
+        </span>
+        <input class="input100" type="password" name="pass" field="mdpcli" required>
+        <span class="focus-input100" data-placeholder="Mot de passe"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input" data-validate="Le mot de passe n'est pas le même que le précédent">
+        <span class="btn-show-pass">
+            <i class="zmdi zmdi-eye"></i>
+        </span>
+        <input class="input100" type="password" name="pass" required> <!--TODO: vérifier qu'il s'agit du même mot de passe-->
+        <span class="focus-input100" data-placeholder="Retapez le mot de passe"></span>
+    </div>
+
+    <div class="wrap-input100">
+        <input class="input100" type="text" name="address" field="adressecli">
+        <span class="focus-input100" data-placeholder="Adresse"></span>
+    </div>
+
+    <div class="wrap-input100">
+        <span>Date de naissance</span>
+        <input class="input100" type="date" name="birth-date" field="datenaissancecli">
+    </div>
+
+    <div class="wrap-input100">
+        <input class="input100" type="text" name="phone" field="telephonecli">
+        <span class="focus-input100" data-placeholder="Téléphone"></span>
+    </div>
+
+    <div class="container-login100-form-btn">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn">
+                Créer un compte
+            </button>
+        </div>
+    </div>
+
+    <div class="text-center p-t-50">
+        <span class="txt1">
+            Vous avez déjà un compte?
+        </span>
+        <a class="txt2" href="">
+            Se connecter
+        </a>
+    </div>
 </form>

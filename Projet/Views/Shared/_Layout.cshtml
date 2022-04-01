@@ -3,46 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Projet</title>
-    <!-- Bootstrap style -->
+    <title>@ViewData["Title"] - noname</title>
     <link id="callCss" rel="stylesheet" href="~/noname/bootstrap.min.css" media="screen" />
     <link href="~/css/main.css" rel="stylesheet" media="screen" />
-    <!-- Bootstrap style responsive -->
     <link href="~/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
-    <!-- fav and touch icons -->
+    <link rel="stylesheet" type="text/css" th:href="~/vendor/animsition/css/animsition.min.css">
     <style type="text/css" id="enject"></style>
 </head>
 <body>
-    <div id="header">
-        <div class="container">
-            <!-- Navbar ================================================== -->
-            <div id="logoArea" class="navbar">
-                <div class="navbar-inner">
-                    <a class="brand" href=""><img src="" alt="no name" /></a>
-                    <form class="form-inline navbar-search" method="get" action="">
-                        <input name="keyword" value="" />
-                        <select value="" class="srchTxt">
-                            <option value="all">TOUS</option>
-                            <option value="electric">ÉLECTRIQUE</option>
-                            <option value="hydraulic">HYDRAULIQUE</option>
-                            <option value="manual">MANUEL</option>
-                        </select>
-                        <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-                    </form>
-                    <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="">Nos magasins</a></li>
-                        <li class=""><a href="">Mon profil</a></li>
-                        <li class=""><a href="">Mon inventaire</a></li>
-                        <li class=""><a href="">Mon panier</a></li>
-                    </ul>
-                    <ul class="nav pull-right" style="left: 475px" sec:authorize="hasAnyAuthority('ADMIN')">
-                        <li class=""><a href="">Gestion utilisateurs</a></li>
-                        <li class=""><a href="">Gestion produits</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -54,8 +22,6 @@
             &copy; 2022 - noname - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

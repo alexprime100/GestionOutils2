@@ -6,13 +6,72 @@
     var returnUrl = ViewData["ReturnUrl"] as string;
     var error = TempData["Error"] as string;
 }
-<h1>Login page</h1>
 @if (!error.IsNullOrEmpty())
 {
     <h2 class="alert-danger" style="padding:20px">@error</h2>
 }
-<form action="/login?ReturnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post">
-    <input type="email" name="email" placeholder="email" />
-    <input type="password" name="password" placeholder="Password" />
-    <input type="submit" value="login" />
-</form>
+
+@{
+    ViewData["Title"] = "Se connecter";
+}
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form" asp-controller="Home" asp-action="" method="post">
+                <span class="login100-form-title p-b-26">
+                    Bienvenue
+                </span>
+                <span class="login100-form-title p-b-48">
+                    <image th:src="~/images/logo_black.png"></image>
+                </span>
+
+                <div class="wrap-input100 validate-input" data-validate="Courriel valide: a@b.c">
+                    <input class="input100" type="text" id="username" name="username">
+                    <span class="focus-input100" data-placeholder="Courriel"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Entrez un mot de passe">
+                    <span class="btn-show-pass">
+                        <i class="zmdi zmdi-eye"></i>
+                    </span>
+                    <input class="input100" type="password" id="password" name="password">
+                    <span class="focus-input100" data-placeholder="Mot de passe"></span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button class="login100-form-btn">
+                            Se connecter
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-center p-t-115">
+                    <span class="txt1">
+                        Vous n'avez pas de compte?
+                    </span>
+                    <a class="txt2" asp-controller="Home" asp-action="Register">
+                        Créer un compte
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+@section Scripts {
+    <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/vendor/animsition/js/animsition.min.js"></script>
+    <script src="~/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <script src="~/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="~/vendor/countdowntime/countdowntime.js"></script>
+    <script src="~/js/main.js"></script>
+}
