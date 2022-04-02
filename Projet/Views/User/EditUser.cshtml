@@ -6,7 +6,7 @@
 <h1>Modifier un utilisateur</h1>
 <hr/>
 <form action="" method="post">
-    <ul> <input type="number" name="id" hidden="hidden" value="@Model.Id" /> </ul>
+    <ul> <input type="hidden" name="id"  value="@Model.Id" /> </ul>
 
     <ul> <label>Nom de famille</label></ul>
     <ul> <input type="text" name="name" value="@Model.Nom" />  </ul>
@@ -27,7 +27,7 @@
     <ul> <input type="email" name="email" value="@Model.Courriel" />  </ul>
 
     <ul> <label>Admin ?</label></ul>
-    <ul> <input type="checkbox" name="role" value="@Model.Role.Equals("Admin")" />  </ul>
-    <hr/>
+    <input type="checkbox" name="role" value="true"/>
+    <hr />
     <ul> <input type="submit" value="edituser" />  </ul>
 </form>

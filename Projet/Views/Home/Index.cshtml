@@ -35,10 +35,16 @@
                 </ul>
                 @if (User.IsInRole("Admin"))
                 {
-                    <ul class="nav pull-right" style="left: 475px">
-                        <li class=""><a href="">Gestion utilisateurs</a></li>
-                        <li class=""><a href="">Gestion produits</a></li>
-                    </ul>
+            <ul class="nav pull-right" style="left: 475px">
+
+                <li class="" asp-controller="User" asp-action="Admin">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Admin">Gestion des utilisateurs</a>
+                </li>
+                <li class="" asp-controller="Products" asp-action="ListProducts">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ListProducts">Gestion des produits</a>
+
+                </li>
+            </ul>
                 }
                 </div>
         </div>

@@ -37,6 +37,9 @@ namespace Projet.Controllers
         [HttpPost("edituser")]
         public IActionResult SaveUser(long id, string name, string firstname, string adress, DateTime dob, string phone, string email, bool role)
         {
+            Console.Write("\n\nTEST\n\n");
+
+            Console.Write(role);
             try
             {
                 Utilisateur user = db.Utilisateurs.GetById(id);
