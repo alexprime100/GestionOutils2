@@ -17,9 +17,9 @@
         <div id="logoArea" class="navbar">
             <div class="navbar-inner">
                 <a class="brand" href=""><img src="~/images/logo_black.png" alt="noname" /></a>
-                <form class="form-inline navbar-search" method="get" action="">
-                    <input name="keyword" value="" />
-                    <select value="" class="srchTxt">
+                <form class="form-inline navbar-search" method="get" asp-controller="Home" asp-action="Search">
+                    <input name="keyword"/>
+                    <select class="srchTxt" name="searchField">
                         <option value="all">TOUS</option>
                         <option value="electric">ÉLECTRIQUE</option>
                         <option value="hydraulic">HYDRAULIQUE</option>

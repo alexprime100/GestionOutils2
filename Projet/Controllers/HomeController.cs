@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Projet.Models;
 using System;
 using System.Collections.Generic;
@@ -27,7 +26,6 @@ namespace Projet.Controllers
 
         public IActionResult Index()
         {
-      
             return View();
         }
 
@@ -43,10 +41,36 @@ namespace Projet.Controllers
             return View();
         }
 
-        [HttpGet("recherche")]
-        public String Recherche()
+        [HttpGet("search")]
+        public String Search(String keyword, String searchField)
         {
-            var responseString = ApiCall.GetApi("https://localhost:31661/api/recherche/advanced");
+            return searchField switch
+            {
+                "all" => AdvancedSearch(keyword),
+                "electric" => ElectricSearch(keyword),
+                "hydraulic" => HydraulicSearch(keyword),
+                _ => "",
+            };
+        }
+
+        [HttpGet("advancedSearch")]
+        public String AdvancedSearch(String keyword)
+        {
+            var responseString = ApiCall.GetApi("https://localhost:31661/api/recherche/advanced/" + keyword);
+            return responseString;
+        }
+
+        [HttpGet("electricSearch")]
+        public String ElectricSearch(String keyword)
+        {
+            var responseString = ApiCall.GetApi("https://localhost:31661/api/recherche/electrique/" + keyword);
+            return responseString;
+        }
+
+        [HttpGet("hydraulicSearch")]
+        public String HydraulicSearch(String keyword)
+        {
+            var responseString = ApiCall.GetApi("https://localhost:31661/api/recherche/hydraulique/" + keyword);
             return responseString;
         }
 

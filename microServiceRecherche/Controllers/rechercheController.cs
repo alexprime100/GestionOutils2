@@ -38,9 +38,8 @@ namespace microServiceRecherche.Controllers
             var jsonHydraulique = JsonConvert.SerializeObject(hydraulique.ToArray());
 
             return String.Concat(jsonElectrique,jsonHydraulique);
-            }
+        }
 
-        // GET: api/recherche/glo
         [HttpGet("advanced", Name = "advancedDefault")]
         public String advancedDefault()
         {
@@ -53,7 +52,6 @@ namespace microServiceRecherche.Controllers
             return String.Concat(jsonElectrique, jsonHydraulique);
         }
 
-        // GET: api/recherche/glo
         [HttpGet("electrique/{name}", Name = "electrique")]
         public String electrique(string name)
         {
@@ -63,7 +61,6 @@ namespace microServiceRecherche.Controllers
             return jsonElectrique;
         }
 
-        // GET: api/recherche/glo
         [HttpGet("electrique", Name = "electriqueDefault")]
         public String electriqueDefault()
         {
@@ -71,6 +68,24 @@ namespace microServiceRecherche.Controllers
             var jsonElectrique = JsonConvert.SerializeObject(electrique.ToArray());
 
             return jsonElectrique;
+        }
+
+        [HttpGet("hydraulique/{name}", Name = "hydraulique")]
+        public String hydraulique(string name)
+        {
+            IQueryable<Object> hydraulique = db.Hydrauliques.Where(hydr => hydr.NomOutil.Contains(name));
+            var jsonHydraulique = JsonConvert.SerializeObject(hydraulique.ToArray());
+
+            return jsonHydraulique;
+        }
+
+        [HttpGet("hydraulique", Name = "hydrauliqueDefault")]
+        public String hydrauliqueDefault()
+        {
+            List<Hydraulique> hydraulique = db.Hydrauliques.ToList();
+            var jsonHydraulique = JsonConvert.SerializeObject(hydraulique.ToArray());
+
+            return jsonHydraulique;
         }
 
         // POST: api/recherche
