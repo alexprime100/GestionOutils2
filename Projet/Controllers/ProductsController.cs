@@ -21,6 +21,13 @@ namespace Projet.Controllers
             db = DataContext.GetInstance();
         }
 
+        [HttpGet("descritionElec")]
+        public IActionResult DescriptionElec(long id)
+        {
+            Electrique elec = db.Electriques.GetElecById(id);
+            return View(elec);
+        }
+
         [HttpGet("editElec")]
         public IActionResult EditElec(long id)
         {
@@ -32,8 +39,6 @@ namespace Projet.Controllers
         [HttpPost("editElec")]
         public IActionResult Save(long id, string nom, long puissance, double prix, string description ,int stock, Byte[] image)
         {
-
-
             try
             {
                 Electrique elec = db.Electriques.GetElecById(id);
@@ -168,8 +173,6 @@ namespace Projet.Controllers
         [HttpPost("editHydrau")]
         public IActionResult Save(long id, string nom, long pression,string description, double prix, int stock, Byte[] image)
         {
-
-
             try
             {
                 Hydraulique hydrau = db.Hydrauliques.GetHydrauById(id);

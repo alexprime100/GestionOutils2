@@ -2,12 +2,21 @@
     ViewData["Title"] = "Acceuil";
 }
 
+@using Projet.Models
+@{
+    var db = DataContext.GetInstance();
+    String name = User.Identity.Name;
+    List<Electrique> listElec = db.Electriques.ToList();
+    List<Hydraulique> listHydrau = db.Hydrauliques.ToList();
+    var returnUrl = ViewData["ReturnUrl"] as string;
+}
+
 <div id="header">
     <div class="container">
         <!-- Navbar ================================================== -->
         <div id="logoArea" class="navbar">
             <div class="navbar-inner">
-                <a class="brand" href=""><img src="" alt="no name" /></a>
+                <a class="brand" href=""><img src="~/images/logo_black.png" alt="noname" /></a>
                 <form class="form-inline navbar-search" method="get" action="">
                     <input name="keyword" value="" />
                     <select value="" class="srchTxt">
@@ -24,11 +33,14 @@
                     <li class=""><a href="">Mon inventaire</a></li>
                     <li class=""><a href="">Mon panier</a></li>
                 </ul>
-                <ul class="nav pull-right" style="left: 475px" sec:authorize="hasAnyAuthority('ADMIN')">
-                    <li class=""><a href="">Gestion utilisateurs</a></li>
-                    <li class=""><a href="">Gestion produits</a></li>
-                </ul>
-            </div>
+                @if (User.IsInRole("Admin"))
+                {
+                    <ul class="nav pull-right" style="left: 475px">
+                        <li class=""><a href="">Gestion utilisateurs</a></li>
+                        <li class=""><a href="">Gestion produits</a></li>
+                    </ul>
+                }
+                </div>
         </div>
     </div>
 </div>
@@ -40,7 +52,7 @@
             <div id="sidebar" class="span3">
                 <div class="well well-small">
                     <a id="myCart" href="">
-                        <img src="" alt="cart">Voir mon panier [3]<span class="badge badge-warning pull-right">$155.00</span>
+                        <img src="~/images/cart.png" alt="cart">Voir mon panier [3]<span class="badge badge-warning pull-right">$155.00</span>
                     </a>
                 </div>
                 <ul id="sideManu" class="nav nav-tabs nav-stacked">
@@ -151,55 +163,38 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr each="">
-                            <td>
-                                <img src="" width="120" height="120" alt="Image" />
-                            </td>
-                            <td text=""></td>
-                            <td text=""></td>
-                            <td text=""></td>
-                            <td>
-                                <form action="" method="post" object="">
-                                    <input style="display: none" type="hidden" value="nomoutil" name="nomoutil" />
-                                    <input style="display: none" type="hidden" value="idelec" name="idelec" />
-                                    <input style="display: none" type="hidden" value="idoutil" name="idoutil" />
-                                    <input style="display: none" type="hidden" value="puissance" name="puissance" />
-                                    <input style="display: none" type="hidden" value="description"
-                                           name="description" />
-                                    <input style="display: none" type="hidden" value="prix" name="prix" />
-                                    <input style="display: none" type="hidden" value="image" name="image" />
-                                    <input type="submit" value="Description" />
-                                </form>
-                            </td>
-                        </tr>
-                        <tr each="">
-                            <td>
-                                <img src="" width="120" height="120" />
-                            </td>
-                            <td text=""></td>
-                            <td text=""></td>
-                            <td text=""></td>
-                            <td>
-                                <form action="" method="post" object="">
-                                    <input style="display: none" type="hidden" value="nomoutil" name="nomoutil" />
-                                    <input style="display: none" type="hidden" value="idhyd" name="idhyd" />
-                                    <input style="display: none" type="hidden" value="idoutil" name="idoutil" />
-                                    <input style="display: none" type="hidden" value="pression" name="pression" />
-                                    <input style="display: none" type="hidden" value="description"
-                                           name="description" />
-                                    <input style="display: none" type="hidden" value="prix" name="prix" />
-                                    <input style="display: none" type="hidden" value="image" name="image" />
-                                    <input type="submit" value="Description" />
-                                </form>
-                            </td>
-                        </tr>
-                        <tr each="">
-                            <td><img alt="Mjolnir" src="~/images/Mjolnir.png"></td>
-                            <!--TODO: image à rendre dynamique avec BDD-->
-                            <td text=""></td>
-                            <td text=""></td>
-                            <td text=""></td>
-                        </tr>
+                        @foreach (var elec in listElec)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="" width="120" height="120" alt="Image" />
+                                </td>
+                                <td>@elec.NomOutil</td>
+                                <td>@elec.Prix</td>
+                                <td>@elec.Description</td>
+                                <td>
+                                    <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@elec.IdElectrique">
+                                        <input type="submit" value="Description" />
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        @foreach (var hydrau in listHydrau)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="" width="120" height="120" alt="Image" />
+                                </td>
+                                <td>@hydrau.NomOutil</td>
+                                <td>@hydrau.Prix</td>
+                                <td>@hydrau.Description</td>
+                                <td>
+                                    <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@hydrau.IdHydraulique">
+                                        <input type="submit" value="Description" />
+                                    </a>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>

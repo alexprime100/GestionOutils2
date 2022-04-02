@@ -1,0 +1,30 @@
+﻿@model Projet.Models.Hydraulique
+@{
+    ViewData["Title"] = "Description produit";
+}
+
+<h1>Description du produit @Model.NomOutil</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th id="product-pic-col">Produit</th>
+            <th id="product-name-col"></th>
+            <th id="product-price-col">Prix</th>
+            <th id="product-power-col">Puissance</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <img src="" width="120" height="120" alt="Image" />
+            </td>
+            <td>@Model.NomOutil</td>
+            <td>@Model.Prix</td>
+            <td>@Model.Pression</td>
+            <td>@Model.Description</td>
+        </tr>
+    </tbody>
+</table>

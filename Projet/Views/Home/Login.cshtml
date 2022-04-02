@@ -3,6 +3,7 @@
 *@
 @using Projet.Extensions;
 @{
+    ViewData["Title"] = "Se connecter";
     var returnUrl = ViewData["ReturnUrl"] as string;
     var error = TempData["Error"] as string;
 }
@@ -11,14 +12,10 @@
     <h2 class="alert-danger" style="padding:20px">@error</h2>
 }
 
-@{
-    ViewData["Title"] = "Se connecter";
-}
-
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form" asp-controller="Home" asp-action="" method="post">
+            <form class="login100-form validate-form" action="/login?ReturnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post">
                 <span class="login100-form-title p-b-26">
                     Bienvenue
                 </span>
@@ -27,7 +24,7 @@
                 </span>
 
                 <div class="wrap-input100 validate-input" data-validate="Courriel valide: a@b.c">
-                    <input class="input100" type="text" id="username" name="username">
+                    <input class="input100" type="email" name="email">
                     <span class="focus-input100" data-placeholder="Courriel"></span>
                 </div>
 
@@ -35,7 +32,7 @@
                     <span class="btn-show-pass">
                         <i class="zmdi zmdi-eye"></i>
                     </span>
-                    <input class="input100" type="password" id="password" name="password">
+                    <input class="input100" type="password" name="password">
                     <span class="focus-input100" data-placeholder="Mot de passe"></span>
                 </div>
 
