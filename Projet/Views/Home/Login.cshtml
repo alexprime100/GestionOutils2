@@ -3,13 +3,16 @@
 *@
 @using Projet.Extensions;
 @{
-    ViewData["Title"] = "Se connecter";
     var returnUrl = ViewData["ReturnUrl"] as string;
     var error = TempData["Error"] as string;
 }
 @if (!error.IsNullOrEmpty())
 {
     <h2 class="alert-danger" style="padding:20px">@error</h2>
+}
+
+@{
+    ViewData["Title"] = "Se connecter";
 }
 
 <div class="limiter">
@@ -24,7 +27,7 @@
                 </span>
 
                 <div class="wrap-input100 validate-input" data-validate="Courriel valide: a@b.c">
-                    <input class="input100" type="email" name="email">
+                    <input class="input100" type="text" name="email">
                     <span class="focus-input100" data-placeholder="Courriel"></span>
                 </div>
 
