@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace Projet.Controllers
 {
@@ -42,15 +43,20 @@ namespace Projet.Controllers
         }
 
         [HttpGet("search")]
-        public String Search(String keyword, String searchField)
+        public IActionResult Search(String keyword, String searchField)
         {
-            return searchField switch
+            string toolsJson = searchField switch
             {
                 "all" => AdvancedSearch(keyword),
                 "electric" => ElectricSearch(keyword),
                 "hydraulic" => HydraulicSearch(keyword),
                 _ => "",
             };
+            toolsJson = toolsJson.Replace("][", ",");
+            var list = JsonSerializer.Deserialize<List<OutilObject>>(toolsJson);
+            ViewData["Tools"] = list;
+
+            return View("index");
         }
 
         [HttpGet("advancedSearch")]

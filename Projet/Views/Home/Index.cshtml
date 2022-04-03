@@ -1,14 +1,12 @@
-﻿@{
-    ViewData["Title"] = "Acceuil";
-}
-
-@using Projet.Models
+﻿@using Projet.Models
 @{
+    ViewData["Title"] = "Acceuil";
     var db = DataContext.GetInstance();
     String name = User.Identity.Name;
     List<Electrique> listElec = db.Electriques.ToList();
     List<Hydraulique> listHydrau = db.Hydrauliques.ToList();
     var returnUrl = ViewData["ReturnUrl"] as string;
+    List<OutilObject> tools = (List<OutilObject>)ViewData["Tools"];
 }
 
 <div id="header">
@@ -63,93 +61,25 @@
                 </div>
                 <ul id="sideManu" class="nav nav-tabs nav-stacked">
                     <li class="subMenu open">
-                        <a> ÉLECTRIQUE [230]</a>
+                        <a> ÉLECTRIQUE [210]</a>
                         <ul>
-                            <li>
-                                <a class="active" href="">
-                                    <i class="icon-chevron-right"></i>Cameras
-                                    (100)
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="icon-chevron-right"></i>Computers, Tablets &
-                                    laptop (30)
-                                </a>
-                            </li>
-                            <li>
-                                <a href=""><i class="icon-chevron-right"></i>Mobile Phone (80)</a>
-                            </li>
-                            <li>
-                                <a href=""><i class="icon-chevron-right"></i>Sound & Vision (15)</a>
-                            </li>
+                            <li><a class="active" href=""><i class="icon-chevron-right"></i>Perceuse (100)</a></li>
+                            <li><a href=""><i class="icon-chevron-right"></i>Visseuse (30)</a></li>
+                            <li><a href=""><i class="icon-chevron-right"></i>Aspirateur (80)</a></li>
                         </ul>
                     </li>
                     <li class="subMenu">
-                        <a> HYDRAULIQUE [840] </a>
+                        <a> HYDRAULIQUE [25] </a>
                         <ul style="display:none">
-                            <li>
-                                <a href="">
-                                    <i class="icon-chevron-right"></i>Women's Clothing
-                                    (45)
-                                </a>
-                            </li>
-                            <li>
-                                <a href=""><i class="icon-chevron-right"></i>Women's Shoes (8)</a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="icon-chevron-right"></i>Women's Hand Bags
-                                    (5)
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="icon-chevron-right"></i>Men's Clothings
-                                    (45)
-                                </a>
-                            </li>
-                            <li>
-                                <a href=""><i class="icon-chevron-right"></i>Men's Shoes (6)</a>
-                            </li>
-                            <li>
-                                <a href=""><i class="icon-chevron-right"></i>Kids Clothing (5)</a>
-                            </li>
-                            <li><a href=""><i class="icon-chevron-right"></i>Kids Shoes (3)</a></li>
+                            <li><a href=""><i class="icon-chevron-right"></i>Presse (20)</a></li>
+                            <li><a href=""><i class="icon-chevron-right"></i>Pistons (5)</a></li>
                         </ul>
                     </li>
                     <li class="subMenu">
-                        <a>MANUEL [1000]</a>
+                        <a>MANUEL [40]</a>
                         <ul style="display:none">
-                            <li><a href=""><i class="icon-chevron-right"></i>Angoves (35)</a></li>
-                            <li>
-                                <a href="">
-                                    <i class="icon-chevron-right"></i>Bouchard Aine & Fils
-                                    (8)
-                                </a>
-                            </li>
-                            <li>
-                                <a href=""><i class="icon-chevron-right"></i>French Rabbit (5)</a>
-                            </li>
-                            <li>
-                                <a href=""><i class="icon-chevron-right"></i>Louis Bernard (45)</a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="icon-chevron-right"></i>BIB Wine (Bag in Box)
-                                    (8)
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="icon-chevron-right"></i>Other Liquors & Wine
-                                    (5)
-                                </a>
-                            </li>
-                            <li><a href=""><i class="icon-chevron-right"></i>Garden (3)</a></li>
-                            <li>
-                                <a href=""><i class="icon-chevron-right"></i>Khao Shong (11)</a>
-                            </li>
+                            <li><a href=""><i class="icon-chevron-right"></i>Tournevis (35)</a></li>
+                            <li><a href=""><i class="icon-chevron-right"></i>Marteau (5)</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -169,37 +99,59 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var elec in listElec)
+                        @if (tools != null)
                         {
-                            <tr>
-                                <td>
-                                    <img src="" width="120" height="120" alt="Image" />
-                                </td>
-                                <td>@elec.NomOutil</td>
-                                <td>@elec.Prix</td>
-                                <td>@elec.Description</td>
-                                <td>
-                                    <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@elec.IdElectrique">
-                                        <input type="submit" value="Description" />
-                                    </a>
-                                </td>
-                            </tr>
+                            foreach (var tool in tools)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="" width="120" height="120" alt="Image" />
+                                    </td>
+                                    <td>@tool.NomOutil</td>
+                                    <td>@tool.Prix</td>
+                                    <td>@tool.Description</td>
+                                    <td>
+                                        <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@tool.IdOutil">
+                                            <input type="submit" value="Description" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
                         }
-                        @foreach (var hydrau in listHydrau)
+                        else
                         {
-                            <tr>
-                                <td>
-                                    <img src="" width="120" height="120" alt="Image" />
-                                </td>
-                                <td>@hydrau.NomOutil</td>
-                                <td>@hydrau.Prix</td>
-                                <td>@hydrau.Description</td>
-                                <td>
-                                    <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@hydrau.IdHydraulique">
-                                        <input type="submit" value="Description" />
-                                    </a>
-                                </td>
-                            </tr>
+                            foreach (var elec in listElec)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="" width="120" height="120" alt="Image" />
+                                    </td>
+                                    <td>@elec.NomOutil</td>
+                                    <td>@elec.Prix</td>
+                                    <td>@elec.Description</td>
+                                    <td>
+                                        <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@elec.IdElectrique">
+                                            <input type="submit" value="Description" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                            foreach (var hydrau in listHydrau)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="" width="120" height="120" alt="Image" />
+                                    </td>
+                                    <td>@hydrau.NomOutil</td>
+                                    <td>@hydrau.Prix</td>
+                                    <td>@hydrau.Description</td>
+                                    <td>
+                                        <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@hydrau.IdHydraulique">
+                                            <input type="submit" value="Description" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
                         }
                     </tbody>
                 </table>
