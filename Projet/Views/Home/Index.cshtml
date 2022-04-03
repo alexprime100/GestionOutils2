@@ -111,7 +111,7 @@
                                     <td>@tool.Prix</td>
                                     <td>@tool.Description</td>
                                     <td>
-                                        @if (listElec.Contains(tool))
+                                        @*@if (listElec.Contains(tool))
                                         {
                                             <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@tool.IdOutil">
                                                 <input type="submit" value="Description" />
@@ -122,7 +122,10 @@
                                             <a asp-controller="Products" asp-action="DescriptionHydrau" asp-route-id="@tool.IdOutil">
                                                 <input type="submit" value="Description" />
                                             </a>
-                                        }
+                                        }*@
+                                        <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@tool.IdOutil">
+                                            <input type="submit" value="Description" />
+                                        </a>
                                     </td>
                                 </tr>
                             }
