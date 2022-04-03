@@ -53,7 +53,7 @@ namespace Projet.Controllers
                 _ => "",
             };
             toolsJson = toolsJson.Replace("][", ",");
-            var list = JsonSerializer.Deserialize<List<OutilObject>>(toolsJson);
+            var list = JsonSerializer.Deserialize<List<OutilObjet>>(toolsJson);
             ViewData["Tools"] = list;
 
             return View("index");

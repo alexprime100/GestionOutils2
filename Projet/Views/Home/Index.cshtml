@@ -6,7 +6,7 @@
     List<Electrique> listElec = db.Electriques.ToList();
     List<Hydraulique> listHydrau = db.Hydrauliques.ToList();
     var returnUrl = ViewData["ReturnUrl"] as string;
-    List<OutilObject> tools = (List<OutilObject>)ViewData["Tools"];
+    List<OutilObjet> tools = (List<OutilObjet>)ViewData["Tools"];
 }
 
 <div id="header">
@@ -111,9 +111,18 @@
                                     <td>@tool.Prix</td>
                                     <td>@tool.Description</td>
                                     <td>
-                                        <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@tool.IdOutil">
-                                            <input type="submit" value="Description" />
-                                        </a>
+                                        @if (listElec.Contains(tool))
+                                        {
+                                            <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@tool.IdOutil">
+                                                <input type="submit" value="Description" />
+                                            </a>
+                                        }
+                                        else if (listHydrau.Contains(tool))
+                                        {
+                                            <a asp-controller="Products" asp-action="DescriptionHydrau" asp-route-id="@tool.IdOutil">
+                                                <input type="submit" value="Description" />
+                                            </a>
+                                        }
                                     </td>
                                 </tr>
                             }
@@ -146,7 +155,7 @@
                                     <td>@hydrau.Prix</td>
                                     <td>@hydrau.Description</td>
                                     <td>
-                                        <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@hydrau.IdHydraulique">
+                                        <a asp-controller="Products" asp-action="DescriptionHydrau" asp-route-id="@hydrau.IdHydraulique">
                                             <input type="submit" value="Description" />
                                         </a>
                                     </td>
