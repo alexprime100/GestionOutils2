@@ -5,7 +5,7 @@
 
 <h1>Modifier le produit @Model.NomOutil</h1>
 <hr />
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <ul> <input type="number" name="id" hidden="hidden" value="@Model.IdElectrique" /> </ul>
     <ul> <label> </label>Nom</ul>
     <ul> <input type="text" name="nom" value="@Model.NomOutil" />  </ul>
@@ -17,6 +17,14 @@
     <ul> <input type="text" name="stock" value="@Model.Stock" />  </ul>
     <ul> <label> </label>Description</ul>
     <ul> <input type="text" name="description" value="@Model.Description" />  </ul>
+    <ul> <label> </label>Image actuelle</ul>
+    <ul> @{if (Model.Image != null) {
+               var base64 = Convert.ToBase64String(Model.Image);
+               var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+               <img src="@imgSrc" width="100" height="100" />
+           }
+          }
+    </ul>
     <ul> <label> </label>Changer d'image</ul>
     <ul> <input type="file" name="file" accept="image/png, image/jpeg"> </ul>
     <br />

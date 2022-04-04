@@ -136,7 +136,14 @@
                             {
                                 <tr>
                                     <td>
-                                        <img src="" width="120" height="120" alt="Image" />
+                                        @{
+                                            if (elec.Image != null)
+                                            {
+                                                var base64 = Convert.ToBase64String(elec.Image);
+                                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                <img src="@imgSrc" width="100" height="100" />
+                                            }
+                                        }
                                     </td>
                                     <td>@elec.NomOutil</td>
                                     <td>@elec.Prix</td>
@@ -152,7 +159,14 @@
                             {
                                 <tr>
                                     <td>
-                                        <img src="" width="120" height="120" alt="Image" />
+                                        @{
+                                            if (hydrau.Image != null)
+                                            {
+                                                var base64 = Convert.ToBase64String(hydrau.Image);
+                                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                <img src="@imgSrc" width="100" height="100" />
+                                            }
+                                        }
                                     </td>
                                     <td>@hydrau.NomOutil</td>
                                     <td>@hydrau.Prix</td>

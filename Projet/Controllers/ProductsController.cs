@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Projet.Extensions;
 using Projet.Models;
 using Projet.Repositories;
+using System.Web;
+using System.IO;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,13 +31,6 @@ namespace Projet.Controllers
             return View(elec);
         }
 
-        [HttpGet("descritionHydrau")]
-        public IActionResult DescriptionHydrau(long id)
-        {
-            Hydraulique hydr = db.Hydrauliques.GetHydrauById(id);
-            return View(hydr);
-        }
-
         [HttpGet("editElec")]
         public IActionResult EditElec(long id)
         {
@@ -44,11 +40,31 @@ namespace Projet.Controllers
 
         
         [HttpPost("editElec")]
-        public IActionResult Save(long id, string nom, long puissance, double prix, string description ,int stock, Byte[] image)
+        public IActionResult Save(long id, string nom, long puissance, double prix, string description ,int stock, IFormFile file)
         {
             try
             {
+                byte[] image;
+                using (var target = new MemoryStream())
+                {
+                    if (file != null)
+                    {
+                        file.CopyTo(target);
+                        image = target.ToArray();
+                    }
+                    else
+                    {
+                        image = null;
+                    }
+                   
+                }
+
+
                 Electrique elec = db.Electriques.GetElecById(id);
+                if (image == null)
+                {
+                    image = elec.Image;
+                }
                 Console.WriteLine(elec.ToString());
                 if (!elec.NomOutil.Equals(nom)) elec.NomOutil = nom;
                 if (!elec.Puissance.Equals(puissance)) elec.Puissance = puissance;
@@ -56,11 +72,14 @@ namespace Projet.Controllers
                 if (!elec.Description.Equals(description)) elec.Description = description;
 
                 if (!elec.Stock.Equals(stock)) elec.Stock = stock;
-                //if (!elec.Image.Equals(image)) elec.Image = image.getByte();
-              
+                if (!elec.Image.Equals(image)) elec.Image = image;
+
                 db.Electriques.Update(elec);
                 db.SaveChanges();
+
             }
+                
+           
             catch (Exception e)
             {
 
@@ -102,8 +121,14 @@ namespace Projet.Controllers
         }
 
         [HttpPost("AddElec")]
-        public IActionResult AddElec(long id, long idOutils, string nom, long puissance, double prix, int stock, string description, Byte[] image)
+        public IActionResult AddElec(long id, long idOutils, string nom, long puissance, double prix, int stock, string description, IFormFile file)
         {
+            byte[] image;
+            using (var target = new MemoryStream())
+            {
+                file.CopyTo(target);
+                image = target.ToArray();
+            }
 
             Electrique newElec = new Electrique
             {
@@ -128,7 +153,9 @@ namespace Projet.Controllers
                 Console.WriteLine(e);
             }
             return RedirectToAction("ListProducts");
+
         }
+
 
         [HttpGet("AddHydrau")]
         public IActionResult AddHydrau()
@@ -138,9 +165,14 @@ namespace Projet.Controllers
         }
 
         [HttpPost("AddHydrau")]
-        public IActionResult AddHydrau(long id, long idOutils, string nom, long pression, double prix, int stock, string description, Byte[] image)
+        public IActionResult AddHydrau(long id, long idOutils, string nom, long pression, double prix, int stock, string description, IFormFile file)
         {
-
+            byte[] image;
+            using (var target = new MemoryStream())
+            {
+                file.CopyTo(target);
+                image = target.ToArray();
+            }
             Hydraulique newHydrau = new Hydraulique
             {
                 IdHydraulique = id,
@@ -176,18 +208,38 @@ namespace Projet.Controllers
 
 
         [HttpPost("editHydrau")]
-        public IActionResult Save(long id, string nom, long pression,string description, double prix, int stock, Byte[] image)
+        public IActionResult Save(long id, string nom, long pression,string description, double prix, int stock, IFormFile file)
         {
             try
             {
+                byte[] image;
+                using (var target = new MemoryStream())
+                {
+                    if (file != null)
+                    {
+                        file.CopyTo(target);
+                        image = target.ToArray();
+                    }
+                    else
+                    {
+                        image = null;
+                    }
+                }
+
                 Hydraulique hydrau = db.Hydrauliques.GetHydrauById(id);
+                if (image == null)
+                {
+                    image = hydrau.Image;
+                }
                 Console.WriteLine(hydrau.ToString());
                 if (!hydrau.NomOutil.Equals(nom)) hydrau.NomOutil = nom;
                 if (!hydrau.Pression.Equals(pression)) hydrau.Pression = pression;
                 if (!hydrau.Prix.Equals(prix)) hydrau.Prix = prix;
                 if (!hydrau.Description.Equals(description)) hydrau.Description = description;
                 if (!hydrau.Stock.Equals(stock)) hydrau.Stock = stock;
-                //if (!elec.Image.Equals(image)) elec.Image = image.getByte();
+                if (!hydrau.Image.Equals(image)) {
+                    hydrau.Image = image;
+                }
 
                 db.Hydrauliques.Update(hydrau);
                 db.SaveChanges();

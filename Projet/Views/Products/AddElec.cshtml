@@ -4,19 +4,19 @@
 
 <h1>Ajouter un produit electrique</h1>
 <hr />
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <ul> <label> </label>Nom</ul>
-    <ul> <input type="text" name="nom" />  </ul>
+    <ul> <input type="text" name="nom" required/>  </ul>
     <ul> <label> </label>Puissance</ul>
-    <ul> <input type="text" name="puissance" />  </ul>
+    <ul> <input type="text" name="puissance"required  />  </ul>
     <ul> <label> </label>Prix</ul>
-    <ul> <input type="text" name="prix" />  </ul>
+    <ul> <input type="text" name="prix" required/>  </ul>
     <ul> <label> </label>Stock</ul>
-    <ul> <input type="text" name="stock" />  </ul>
+    <ul> <input type="text" name="stock" required/>  </ul>
     <ul> <label> </label>Description</ul>
-    <ul> <input type="text" name="description" />  </ul>
+    <ul> <input type="text" name="description" required/>  </ul>
     <ul> <label> </label>Changer d'image</ul>
-    <ul> <input type="file" name="file" accept="image/png, image/jpeg"> </ul>
+    <ul> <input type="file" name="file" accept="image/png, image/jpeg" required> </ul>
     <br />
     <ul> <input asp-controller="Products" type="submit" value="Save" />  </ul>
 </form>
