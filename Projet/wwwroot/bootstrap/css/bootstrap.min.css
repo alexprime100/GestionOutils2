@@ -3364,15 +3364,15 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
     margin-right: 2px
 }
 
-.nav-list .divider {
-    *width: 100%;
-    height: 1px;
-    margin: 9px 1px;
-    *margin: -5px 0 5px;
-    overflow: hidden;
-    background-color: #e5e5e5;
-    border-bottom: 1px solid #fff
-}
+    .nav-list .divider {
+        *width: input100%;
+        height: 1px;
+        margin: 9px 1px;
+        *margin: -5px 0 5px;
+        overflow: hidden;
+        background-color: #e5e5e5;
+        border-bottom: 1px solid #fff
+    }
 
 .nav-tabs, .nav-pills {
     *zoom: 1

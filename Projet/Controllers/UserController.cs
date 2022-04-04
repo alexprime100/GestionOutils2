@@ -35,7 +35,7 @@ namespace Projet.Controllers
         }
 
         [HttpPost("edituser")]
-        public IActionResult SaveUser(long id, string name, string firstname, string adress, DateTime dob, string phone, string email, bool role)
+        public IActionResult SaveUser(long id, string name, string firstname, string adress, DateTime dob, string phone, string email, bool role = false)
         {
             Console.Write("\n\nTEST\n\n");
 

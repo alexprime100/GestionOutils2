@@ -31,6 +31,14 @@ namespace Projet.Controllers
             return View(elec);
         }
 
+        [HttpGet("descritionHydrau")]
+        public IActionResult DescriptionHydrau(long id)
+        {
+            Hydraulique hydrau = db.Hydrauliques.GetHydrauById(id);
+            return View(hydrau);
+        }
+
+
         [HttpGet("editElec")]
         public IActionResult EditElec(long id)
         {
