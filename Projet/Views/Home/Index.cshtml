@@ -35,7 +35,7 @@
                 </ul>
                 @if (User.IsInRole("Admin"))
                 {
-                   <ul class="nav pull-right" style="left: 475px">
+                    <ul class="nav pull-right" style="left: 475px">
 
                         <li class="" asp-controller="User" asp-action="Admin">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Admin">Gestion des utilisateurs</a>
@@ -45,7 +45,7 @@
 
                         </li>
                     </ul>
-                        }
+                }
             </div>
         </div>
     </div>
@@ -87,7 +87,7 @@
                 </ul>
                 <br />
             </div>
-            <!-- Sidebar end=============================================== -->
+            <!-- Sidebar end ============================================== -->
             <!-- Products list ============================================ -->
             <div class="span2">
                 <table class="overview-description">
@@ -102,85 +102,83 @@
                     </thead>
                     <tbody>
                         @if (tools != null)
-                                                                        {
-                                                                            foreach (var tool in tools)
-                                                                            {
-                        <tr>
-                            <td>
-                                <img src="" width="120" height="120" alt="Image" />
-                            </td>
-                            <td>@tool.NomOutil</td>
-                            <td>@tool.Prix</td>
-                            <td>@tool.Description</td>
-                            <td>
-                                @*@if (listElec.Contains(tool))
-                                    {
-                                        <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@tool.IdOutil">
-                                            <input type="submit" value="Description" />
-                                        </a>
-                                    }
-                                    else if (listHydrau.Contains(tool))
-                                    {
-                                        <a asp-controller="Products" asp-action="DescriptionHydrau" asp-route-id="@tool.IdOutil">
-                                            <input type="submit" value="Description" />
-                                        </a>
-                                    }*@
-                                <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@tool.IdOutil">
-                                    <input type="submit" value="Description" />
-                                </a>
-                            </td>
-                        </tr>
-}
-                                                                }
-                                                                else
-{
-                        foreach (var elec in listElec)
                         {
-                            <tr>
-                                <td>
-                                    @{
-                                        if (elec.Image != null)
+                            foreach (var tool in tools)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (tool.Image != null)
+                                        {
+                                            var base64 = Convert.ToBase64String(tool.Image);
+                                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                            <img src="@imgSrc" width="120" height="120" alt="Image" />
+                                        }
+                                    </td>
+                                    <td>@tool.NomOutil</td>
+                                    <td>@tool.Prix</td>
+                                    <td>@tool.Description</td>
+                                    <td>
+                                        @if (tool.IdElectrique != 0)
+                                        {
+                                            <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@tool.IdElectrique">
+                                                <input type="submit" value="Description" />
+                                            </a>
+                                        }
+                                        else if (tool.IdHydraulique != 0)
+                                        {
+                                            <a asp-controller="Products" asp-action="DescriptionHydrau" asp-route-id="@tool.IdHydraulique">
+                                                <input type="submit" value="Description" />
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            @foreach (var elec in listElec)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (elec.Image != null)
                                         {
                                             var base64 = Convert.ToBase64String(elec.Image);
                                             var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                            <img src="@imgSrc" width="100" height="100" />
+                                            <img src="@imgSrc" width="120" height="120" />
                                         }
-                                    }
-                                </td>
-                                <td>@elec.NomOutil</td>
-                                <td>@elec.Prix</td>
-                                <td>@elec.Description</td>
-                                <td>
-                                    <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@elec.IdElectrique">
-                                        <input type="submit" value="Description" />
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                        foreach (var hydrau in listHydrau)
-                        {
-                            <tr>
-                                <td>
-                                    @{
-                                        if (hydrau.Image != null)
+                                    </td>
+                                    <td>@elec.NomOutil</td>
+                                    <td>@elec.Prix</td>
+                                    <td>@elec.Description</td>
+                                    <td>
+                                        <a asp-controller="Products" asp-action="DescriptionElec" asp-route-id="@elec.IdElectrique">
+                                            <input type="submit" value="Description" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                            @foreach (var hydrau in listHydrau)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (hydrau.Image != null)
                                         {
                                             var base64 = Convert.ToBase64String(hydrau.Image);
                                             var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                            <img src="@imgSrc" width="100" height="100" />
+                                            <img src="@imgSrc" width="120" height="120" />
                                         }
-                                    }
-                                </td>
-                                <td>@hydrau.NomOutil</td>
-                                <td>@hydrau.Prix</td>
-                                <td>@hydrau.Description</td>
-                                <td>
-                                    <a asp-controller="Products" asp-action="DescriptionHydrau" asp-route-id="@hydrau.IdHydraulique">
-                                        <input type="submit" value="Description" />
-                                    </a>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>@hydrau.NomOutil</td>
+                                    <td>@hydrau.Prix</td>
+                                    <td>@hydrau.Description</td>
+                                    <td>
+                                        <a asp-controller="Products" asp-action="DescriptionHydrau" asp-route-id="@hydrau.IdHydraulique">
+                                            <input type="submit" value="Description" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
                         }
-}
                     </tbody>
                 </table>
             </div>

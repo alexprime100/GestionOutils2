@@ -43,7 +43,7 @@ namespace Projet.Controllers
         }
 
         [HttpGet("search")]
-        public IActionResult Search(String keyword, String searchField)
+        public IActionResult Search(string keyword, string searchField)
         {
             string toolsJson = searchField switch
             {
@@ -52,29 +52,35 @@ namespace Projet.Controllers
                 "hydraulic" => HydraulicSearch(keyword),
                 _ => "",
             };
-            toolsJson = toolsJson.Replace("][", ",");
-            var list = JsonSerializer.Deserialize<List<OutilObjet>>(toolsJson);
-            ViewData["Tools"] = list;
+            if (toolsJson.Contains("[]")) // Si on a des objets soit électriques, soit hydralique
+                toolsJson = toolsJson.Replace("[]", "");
+            else if (toolsJson.Contains("][")) // Si on a des objets électriques et hydraulique
+                toolsJson = toolsJson.Replace("][", ",");
+
+            if (toolsJson.Length == 0)
+                ViewData["Tools"] = new List<OutilObjet>();
+            else
+                ViewData["Tools"] = JsonSerializer.Deserialize<List<OutilObjet>>(toolsJson);
 
             return View("index");
         }
 
         [HttpGet("advancedSearch")]
-        public String AdvancedSearch(String keyword)
+        public string AdvancedSearch(string keyword)
         {
             var responseString = ApiCall.GetApi("https://localhost:31661/api/recherche/advanced/" + keyword);
             return responseString;
         }
 
         [HttpGet("electricSearch")]
-        public String ElectricSearch(String keyword)
+        public string ElectricSearch(string keyword)
         {
             var responseString = ApiCall.GetApi("https://localhost:31661/api/recherche/electrique/" + keyword);
             return responseString;
         }
 
         [HttpGet("hydraulicSearch")]
-        public String HydraulicSearch(String keyword)
+        public string HydraulicSearch(string keyword)
         {
             var responseString = ApiCall.GetApi("https://localhost:31661/api/recherche/hydraulique/" + keyword);
             return responseString;
@@ -173,7 +179,7 @@ namespace Projet.Controllers
         [Authorize]
         public IActionResult Profile()
         {
-           
+
             return View();
         }
 
@@ -189,6 +195,6 @@ namespace Projet.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-     
+
     }
 }
