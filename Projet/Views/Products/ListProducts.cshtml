@@ -42,7 +42,7 @@
                             {
                                 var base64 = Convert.ToBase64String(elec.Image);
                                 var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                <img src="@imgSrc" width="100" height="100"/>
+                                <img src="@imgSrc" width="100" height="100" />
                             }
                         }
                     </th>
@@ -87,7 +87,7 @@
                     <th>@hydrau.Prix</th>
                     <th>@hydrau.Stock</th>
                     <th>
-                         @{
+                        @{
                             if (hydrau.Image != null)
                             {
                                 var base64 = Convert.ToBase64String(hydrau.Image);
@@ -110,6 +110,9 @@
     <p> <center><a asp-action="AddHydrau" class="btn btn-sm btn-info">Ajouter un produit Hydrau</a> </center></p>
     <br />
     <br />
+
+    <br />
+    <p> <center><a asp-action="Index" asp-controller="Home" class="btn btn-secondary btn-lg">Retour menu principal</a> </center></p>
 
 
 </div>
