@@ -179,7 +179,6 @@ namespace Projet.Controllers
         [Authorize]
         public IActionResult Profile()
         {
-
             return View();
         }
 
